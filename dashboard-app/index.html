@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard App</title>
+
+  <!-- Styles & PWA -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="assets/logo.png" type="image/png" />
+
+  <!-- Chart.js (for Stats page) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- App entry (ESM) -->
+  <script type="module" src="script.js" defer></script>
+</head>
+<body>
+  <div class="app">
+
+    <!-- Sidebar (no logo) -->
+    <aside class="sidebar">
+      <h1>Dashboard</h1>
+      <nav>
+        <ul>
+          <li><button class="nav-btn active" data-page="home">Home</button></li>
+          <li><button class="nav-btn" data-page="tasks">Tasks</button></li>
+          <li><button class="nav-btn" data-page="stats">Stats</button></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <!-- Main area -->
+    <div class="main">
+      <!-- Topbar -->
+      <header class="topbar">
+        <div class="spacer"></div>
+        <button id="themeToggle" aria-label="Toggle theme">Toggle theme</button>
+      </header>
+
+      <main class="content">
+
+        <!-- Home -->
+        <section id="home" class="page active">
+          <h2>Welcome to your Dashboard</h2>
+          <p>Interactive dashboard with local storage, charts, drag-and-drop, and offline support.</p>
+
+          <div class="grid">
+            <div class="card">
+              <h3>Total Tasks</h3>
+              <p class="stat" id="stat-total">0</p>
+            </div>
+            <div class="card">
+              <h3>Completed</h3>
+              <p class="stat" id="stat-done">0</p>
+            </div>
+            <div class="card">
+              <h3>Pending</h3>
+              <p class="stat" id="stat-pending">0</p>
+            </div>
+            <div class="card">
+              <h3>Offline Ready</h3>
+              <p class="stat small" id="stat-offline">Service worker will cache on first load</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Tasks -->
+    
+<section id="tasks" class="page">
+  <h1>Task Manager</h1>
+  <div class="task-controls">
+    <input type="text" id="taskInput" placeholder="Enter new task">
+    <button id="addTaskBtn">Add Task</button>
+    <button id="clearCompletedBtn">Clear Completed</button>
+  </div>
+  <ul id="taskList"></ul>
+</section>
+
+
+        <!-- Stats -->
+        <section id="stats" class="page">
+          <h2>Statistics</h2>
+          <div class="card">
+            <canvas id="statsChart" height="140"></canvas>
+          </div>
+          <div class="muted small">Data source: JSONPlaceholder (sample API)</div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+/* ========== Theme tokens ========== */
+:root {
+  --bg: #f5f7fb;
+  --panel: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --brand: #2563eb;
+  --brand-700: #1e40af;
+  --border: #e5e7eb;
+  --shadow: 0 6px 20px rgba(0,0,0,.06);
+}
+
+html[data-theme="dark"] {
+  --bg: #0f172a;
+  --panel: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --brand: #3b82f6;
+  --brand-700: #1d4ed8;
+  --border: #1f2937;
+  --shadow: 0 6px 20px rgba(0,0,0,.35);
+}
+
+/* ========== Base ========== */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.app { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+
+/* ========== Sidebar ========== */
+.sidebar {
+  background: var(--brand);
+  color: #fff;
+  padding: 24px 18px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.sidebar h1 { font-size: 22px; margin: 0 0 16px; }
+.sidebar nav ul { list-style: none; margin: 0; padding: 0; }
+.nav-btn {
+  width: 100%; text-align: left;
+  padding: 12px 14px; margin: 8px 0;
+  border: 0; border-radius: 10px; cursor: pointer;
+  background: rgba(255,255,255,.12); color: #fff;
+  transition: background .18s ease, transform .06s;
+  font-size: 15px;
+}
+.nav-btn:hover { background: rgba(255,255,255,.2); }
+.nav-btn.active { background: #fff; color: var(--brand); }
+
+/* ========== Main ========== */
+.main { display: grid; grid-template-rows: 60px 1fr; min-width: 0; }
+.topbar {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  padding: 0 16px;
+}
+.topbar .spacer { flex: 1; }
+#themeToggle {
+  background: var(--brand); color: #fff; border: 0;
+  padding: 8px 12px; border-radius: 8px; cursor: pointer;
+}
+#themeToggle:hover { background: var(--brand-700); }
+
+.content { padding: 22px; }
+
+/* ========== Page utilities ========== */
+.page { display: none; }
+.page.active { display: block; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 18px; margin-top: 18px;
+}
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 14px;
+  padding: 16px;
+}
+.stat { font-size: 30px; font-weight: 700; margin: 6px 0 0; }
+.small { font-size: 13px; }
+.muted { color: var(--muted); }
+
+/* ========== Task Manager ========== */
+#taskList li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px;
+  margin-bottom: 6px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+#taskList li.completed span {
+  text-decoration: line-through;
+  color: gray;
+}
+
+#taskList button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.task-form { display: flex; gap: 10px; margin: 12px 0 16px; }
+.task-form input {
+  flex: 1; padding: 10px 12px;
+  border: 1px solid var(--border); border-radius: 10px;
+  background: var(--panel); color: var(--text);
+}
+.task-form button {
+  padding: 10px 14px; border: 0; border-radius: 10px; cursor: pointer;
+  background: var(--brand); color: #fff;
+}
+.task-form button:hover { background: var(--brand-700); }
+.task-form .ghost {
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--border);
+}
+.task-form .ghost:hover { color: var(--text); }
+
+.task-list { list-style: none; margin: 0; padding: 0; }
+.task {
+  display: grid; grid-template-columns: 22px 1fr auto;
+  align-items: center; gap: 10px;
+  padding: 12px; margin-bottom: 10px;
+  background: var(--panel); border: 1px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow);
+}
+.drag-handle {
+  width: 22px; height: 22px; border-radius: 6px;
+  display: grid; place-items: center; color: var(--muted);
+  cursor: grab; user-select: none;
+}
+.task .text { outline: none; }
+.task.done .text { text-decoration: line-through; color: var(--muted); }
+
+.task .delete {
+  background: transparent; color: var(--muted);
+  border: 0; border-radius: 8px; cursor: pointer; padding: 6px 8px;
+}
+.task .delete:hover { color: #ef4444; }
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  .app { grid-template-columns: 200px 1fr; }
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar { position: static; height: auto; }
+  .grid { grid-template-columns: 1fr; }
+}
